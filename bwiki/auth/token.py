@@ -38,7 +38,7 @@ class Token(abcs.Singleton):
     def get_cookies(self):
         self.cookies.update(Cookies(
             self._host,
-            self._site,
+            '/' + self._site,
             self._browser
         ).get())
         self.cookies.update(Cookies(
@@ -51,7 +51,7 @@ class Token(abcs.Singleton):
     def get_token(self):
         params = {
             'action': 'query',
-            'meta': 'token',
+            'meta': 'tokens',
             'format': 'json'
         }
         resp = self.session.get(
