@@ -12,16 +12,22 @@ from bwiki.utils import abcs
 from bwiki.utils import path
 
 
-class ConfigLoader(abcs.Singleton):
+class Config(abcs.Singleton):
     """Config Loader
 
     This is a Singleton Class
     """
+    FLAGS = {
+        'config_path': path.join(
+            path.root,
+            'config.json'
+        )
+    }
     _configs = dict()
 
     @staticmethod
     def load(filename) -> dict:
-        if filename not in ConfigLoader._configs:
+        if filename not in Config._configs:
             conf = dict()
             if path.exists(filename):
                 try:
@@ -32,13 +38,13 @@ class ConfigLoader(abcs.Singleton):
                     )))
                 except Exception as e:
                     print(e)
-            ConfigLoader._configs[filename] = conf
-        return ConfigLoader._configs.get(filename, {})
+            Config._configs[filename] = conf
+        return Config._configs.get(filename, {})
 
     @staticmethod
     def root() -> dict:
-        filename = path.join(
-            path.root,
-            'config.json'
-        )
-        return ConfigLoader.load(filename)
+        return Config.load(Config.FLAGS['config_path'])
+
+    @staticmethod
+    def set_config_path(config_path: str):
+        Config.FLAGS['config_path'] = config_path

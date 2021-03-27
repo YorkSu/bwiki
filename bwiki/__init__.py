@@ -15,3 +15,8 @@ del _os
 
 from bwiki import api
 from bwiki.auth.token import Token
+from bwiki.utils.config import Config
+
+
+FLAGS = Config.FLAGS
+set_config_path = Config.set_config_path

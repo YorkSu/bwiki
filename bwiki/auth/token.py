@@ -9,7 +9,7 @@ import requests
 
 from bwiki.auth.cookies import Cookies
 from bwiki.utils import abcs
-from bwiki.utils.config_loader import ConfigLoader
+from bwiki.utils.config import Config
 
 
 class Token(abcs.Singleton):
@@ -18,7 +18,7 @@ class Token(abcs.Singleton):
     This is a Singleton Class
     """
     def __init__(self):
-        self._conf = _conf = ConfigLoader.root()
+        self._conf = _conf = Config.root()
         self._host = _conf['host']
         self._root_host = _conf['root_host']
         self._site = _conf['site']
