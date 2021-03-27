@@ -18,10 +18,10 @@ pip install -r requirements.txt
 
 ```json
 {
-	"host": "wiki.biligame.com",
-	"host2": ".biligame.com",
-	"site": "xxxx",  // 这里改成你需要编辑的wiki站点
-	"browser": "Edge",  // 获取Cookies的浏览器
+    "host": "wiki.biligame.com",
+    "host2": ".biligame.com",
+    "site": "xxxx",  // 这里改成你需要编辑的wiki站点
+    "browser": "Edge",  // 获取Cookies的浏览器
     "Cookies": {
         "SESSDATA": ""  // 如果不通过浏览器获取Cookies，需要手动填入该值
     }
