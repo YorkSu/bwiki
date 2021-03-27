@@ -30,7 +30,7 @@ class Token(abcs.Singleton):
         self.session = requests.Session()
 
         # Init cookies
-        if 'Cookies' in _conf:
+        if 'Cookies' in _conf and _conf['Cookies']['SESSDATA']:
             self.cookies = _conf['Cookies']
         else:
             self.get_cookies()
