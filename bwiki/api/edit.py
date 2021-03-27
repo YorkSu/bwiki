@@ -39,16 +39,16 @@ class Edit(BaseAPI):
                  contentformat: str = None,
                  contentmodel: str = None,
                  captchaword: str = None,
-                 captchaid: str = None,):
+                 captchaid: str = None):
         super().__init__()
         self.set_params([
             {'action': 'edit'},
-            arg.select_title_pageid(title, pageid),
+            arg.select_one({'title': title, 'pageid': pageid}),
             arg.select_not_none('section', section),
             arg.select_not_none('sectiontitle', sectiontitle),
             arg.select_not_none('text', text),
             arg.select_not_none('summary', summary),
-            arg.select_tags(tags),
+            arg.select_list('tags', tags),
             arg.select_not_none('minor', minor),
             arg.select_not_none('notminor', notminor),
             arg.select_not_none('bot', bot),
@@ -65,6 +65,6 @@ class Edit(BaseAPI):
             arg.select_contentformat(contentformat),
             arg.select_contentmodel(contentformat),
             arg.select_not_none('captchaword', captchaword),
-            arg.select_not_none('captchaid', captchaid),
+            arg.select_not_none('captchaid', captchaid)
         ])
 

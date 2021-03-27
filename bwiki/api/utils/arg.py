@@ -15,6 +15,7 @@ def _select_in_values(key: str, values: Sequence, default=None):
         if value is not None:
             params[key] = value
         return params
+
     return select_function
 
 
@@ -25,21 +26,19 @@ def select_not_none(key: str, value: Any):
     return params
 
 
-def select_title_pageid(title: str, pageid: int):
+def select_one(dictionary: dict):
     params = dict()
-    if title is not None:
-        params['title'] = title
-    elif pageid is not None:
-        params['pageid'] = pageid
-    else:
-        raise TypeError("title and pageid provide at least one of them")
-    return params
+    for k, v in dictionary.items():
+        if v is not None:
+            params[k] = v
+            return params
+    raise TypeError("at least provide one of them: " + ','.join(dictionary.keys()))
 
 
-def select_tags(tags: Sequence[str]):
+def select_list(key, sequence: Sequence[str]):
     params = dict()
-    if tags is not None:
-        params['tags'] = '|'.join(tags)
+    if sequence is not None:
+        params[key] = '|'.join(sequence)
     return params
 
 

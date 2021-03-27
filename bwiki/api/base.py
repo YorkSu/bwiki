@@ -13,6 +13,7 @@ class BaseAPI:
     def __init__(self, *args, **kwargs):
         self._params = dict()
         self._token = Token()
+        self._use_token = True
         self.session = self._token.session
         self.url = self._token.url
         self.cookies = self._token.cookies
@@ -26,6 +27,8 @@ class BaseAPI:
             self._params.update(p)
 
     def send(self, **kwargs):
+        if not self._use_token:
+            self._params.pop('token')
         return self.session.post(
             url=self.url,
             cookies=self.cookies,

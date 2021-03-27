@@ -23,9 +23,9 @@ class Delete(BaseAPI):
         super().__init__()
         self.set_params([
             {'action': 'delete'},
-            arg.select_title_pageid(title, pageid),
+            arg.select_one({'title': title, 'pageid': pageid}),
             arg.select_not_none('reason', reason),
-            arg.select_tags(tags),
+            arg.select_list('tags', tags),
             arg.select_watchlist(watchlist),
-            arg.select_not_none('oldimage', oldimage),
+            arg.select_not_none('oldimage', oldimage)
         ])
