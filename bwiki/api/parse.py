@@ -9,7 +9,6 @@ from typing import Sequence
 
 from bwiki.api.base import BaseAPI
 from bwiki.api.utils import arg
-from bwiki.auth.token import Token
 
 
 class Parse(BaseAPI):

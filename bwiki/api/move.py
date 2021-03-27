@@ -9,12 +9,11 @@ from typing import Sequence
 
 from bwiki.api.base import BaseAPI
 from bwiki.api.utils import arg
-from bwiki.auth.token import Token
 
 
 class Move(BaseAPI):
     def __init__(self,
-                 fm: str = None,
+                 _form: str = None,
                  fromid: int = None,
                  to: str = None,
                  reason: str = None,
@@ -27,7 +26,7 @@ class Move(BaseAPI):
         super().__init__()
         self.set_params([
             {'action': 'move'},
-            arg.select_one({'from': fm, 'fromid': fromid}),
+            arg.select_one({'from': _form, 'fromid': fromid}),
             arg.select_not_none('to', to),
             arg.select_not_none('reason', reason),
             arg.select_not_none('movetalk', movetalk),

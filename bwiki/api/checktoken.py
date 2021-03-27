@@ -7,7 +7,6 @@ SEE https://wiki.biligame.com/wiki/api.php?action=help&modules=checktoken
 
 from bwiki.api.base import BaseAPI
 from bwiki.api.utils import arg
-from bwiki.auth.token import Token
 
 
 class Checktoken(BaseAPI):
@@ -16,9 +15,7 @@ class Checktoken(BaseAPI):
                  maxtokenage: int = None):
         super().__init__()
         self.set_params([
-            {
-                'action': 'checktoken',
-                'type': type
-            },
+            {'action': 'checktoken'},
+            {'type': type},
             arg.select_not_none('maxtokenage', maxtokenage)
         ])
