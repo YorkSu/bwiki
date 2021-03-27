@@ -4,22 +4,26 @@
 Base API Class
 """
 
+from typing import Sequence
 
 from bwiki.auth.token import Token
 
 
 class BaseAPI:
-    def __init__(self, token: Token, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         self._params = dict()
-        self._token = token
-        self.session = token.session
-        self.url = token.url
-        self.cookies = token.cookies
-        self.token = token.token
-        self._params.update(token.params)
+        self._token = Token()
+        self.session = self._token.session
+        self.url = self._token.url
+        self.cookies = self._token.cookies
+        self.token = self._token.token
+        self._params.update(self._token.params)
 
-    def set_params(self, params: dict):
-        self._params.update(params)
+    def set_params(self, params: Sequence[dict]):
+        if not isinstance(params, (list, tuple)):
+            params = [params]
+        for p in params:
+            self._params.update(p)
 
     def send(self, **kwargs):
         return self.session.post(
