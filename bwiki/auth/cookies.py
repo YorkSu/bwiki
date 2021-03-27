@@ -35,7 +35,7 @@ class Cookies:
 
     def _get_string(self, local_state):
         with open(local_state, 'r', encoding='utf-8') as f:
-            return son.load(f)['os_crypt']['encrypted_key']
+            return json.load(f)['os_crypt']['encrypted_key']
 
     def _pull_the_key(self, base64_encrypted_key):
         encrypted_key_with_header = base64.b64decode(base64_encrypted_key)
@@ -62,7 +62,7 @@ class Cookies:
             key = self._pull_the_key(self._get_string(self._local_state))
             for host_key, name, encrypted_value in res:
                 if encrypted_value[0:3] == b'v10':
-                    cookies[name] = _decrypt_string(key, encrypted_value)
+                    cookies[name] = self._decrypt_string(key, encrypted_value)
                 else:
                     cookies[name] = CryptUnprotectData(encrypted_value)[1].decode()
             return cookies
