@@ -28,11 +28,12 @@ class ConfigLoader(abcs.Singleton):
                     conf.update(json.load(open(
                         filename,
                         'r',
-                        encoding="urf-8"
+                        encoding="utf-8"
                     )))
                 except Exception as e:
                     print(e)
-        return ConfigLoader._configs[filename]
+            ConfigLoader._configs[filename] = conf
+        return ConfigLoader._configs.get(filename, {})
 
     @staticmethod
     def root() -> dict:
