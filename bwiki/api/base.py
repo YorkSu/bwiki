@@ -28,7 +28,7 @@ class BaseAPI:
         for p in params:
             self._params.update(p)
 
-    def set_extra_params(self, **kwargs):
+    def set_extra_params(self, kwargs: dict):
         self._extra_params.update(kwargs)
 
     def send(self):

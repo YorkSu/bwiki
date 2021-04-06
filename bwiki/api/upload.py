@@ -47,5 +47,5 @@ class Upload(BaseAPI):
             arg.select_not_none('checkstatus', checkstatus),
         ])
         self.set_extra_params({
-            'file': (filename, open(localfile, 'rb'))
+            'files': {'file': (filename, open(localfile, 'rb'))}
         })

@@ -14,6 +14,7 @@ from bwiki.api import expandtemplates
 from bwiki.api import move
 from bwiki.api import parse
 from bwiki.api import purge
+from bwiki.api import upload
 
 from bwiki.api.checktoken import Checktoken
 from bwiki.api.delete import Delete
@@ -22,3 +23,4 @@ from bwiki.api.expandtemplates import Expandtemplates
 from bwiki.api.move import Move
 from bwiki.api.parse import Parse
 from bwiki.api.purge import Purge
+from bwiki.api.upload import Upload
