@@ -10,6 +10,7 @@ import json
 
 from bwiki.utils import abcs
 from bwiki.utils import path
+from bwiki.utils.flags import FLAGS
 
 
 class Config(abcs.Singleton):
@@ -17,17 +18,9 @@ class Config(abcs.Singleton):
 
     This is a Singleton Class
     """
-    FLAGS = {
-        'config_path': path.join(
-            path.root,
-            'config.json'
-        )
-    }
-    _configs = dict()
-
     @staticmethod
     def load(filename) -> dict:
-        if filename not in Config._configs:
+        if filename not in FLAGS.configs:
             conf = dict()
             if path.exists(filename):
                 try:
@@ -38,13 +31,9 @@ class Config(abcs.Singleton):
                     )))
                 except Exception as e:
                     print(e)
-            Config._configs[filename] = conf
-        return Config._configs.get(filename, {})
+            FLAGS.configs[filename] = conf
+        return FLAGS.configs.get(filename, {})
 
     @staticmethod
     def root() -> dict:
-        return Config.load(Config.FLAGS['config_path'])
-
-    @staticmethod
-    def set_config_path(config_path: str):
-        Config.FLAGS['config_path'] = config_path
+        return Config.load(FLAGS.config_path)

@@ -15,8 +15,13 @@ del _os
 
 from bwiki import api
 from bwiki.auth.token import Token
-from bwiki.utils.config import Config
+from bwiki.utils.flags import FLAGS
 
 
-FLAGS = Config.FLAGS
-set_config_path = Config.set_config_path
+def init(config_path: str=None):
+    """Init Method"""
+    if config_path is not None:
+        FLAGS.config_path = config_path
+    if FLAGS.token is None:
+        FLAGS.token = Token()
+    FLAGS.token.get_token()
